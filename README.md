@@ -34,8 +34,11 @@ moz.get_domain_authority(url='https://www.terakeet.com',
 ```angular2html
 from tk_apis import semrush_calls as sr
 
-sr.get_semrush_data(keyword='babylonian empire', 
+sr.get_keyword_data(keyword='babylonian empire', 
                     api_key=os.environ['SEMRUSH_KEY'])
+sr.get_organic_results(keyword='babylonian empire',
+                       api_key=os.environ['SEMRUSH_KEY'],
+                       n=10)
 sr.get_search_volume(keyword='sumerians', 
                      api_key=os.environ['SEMRUSH_KEY'])
 ```
