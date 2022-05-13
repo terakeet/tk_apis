@@ -34,13 +34,20 @@ moz.get_domain_authority(url='https://www.terakeet.com',
 ```angular2html
 from tk_apis import semrush_calls as sr
 
+sr.get_related_keywords(keyword='babylonian empire', 
+                        api_key=os.environ['SEMRUSH_KEY'])
+sr.get_top_related_keyword(keyword='babylonian empire', 
+                           api_key=os.environ['SEMRUSH_KEY'])
+
 sr.get_keyword_data(keyword='babylonian empire', 
                     api_key=os.environ['SEMRUSH_KEY'])
+sr.get_search_volume(keyword='sumerians', 
+                     api_key=os.environ['SEMRUSH_KEY'])
+
 sr.get_organic_results(keyword='babylonian empire',
                        api_key=os.environ['SEMRUSH_KEY'],
                        n=10)
-sr.get_search_volume(keyword='sumerians', 
-                     api_key=os.environ['SEMRUSH_KEY'])
+
 ```
 
 ### SerpApi
@@ -49,6 +56,7 @@ from tk_apis import serpapi_calls as sa
 
 serp = sa.get_serp_result(keyword='arnold schwarzenegger', 
                           api_key=os.environ['SERPAPI_KEY'])
+
 sa.extract_organic_df(result_set=serp)
 sa.extract_knowledge_graph(result_set=serp)
 sa.extract_top_stories(result_set=serp)
