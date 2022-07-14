@@ -3,23 +3,34 @@ import pandas as pd
 import numpy as np
 
 
-def get_serp_result(keyword: str, api_key: str, n=10, offset=0):
+def get_serp_result(keyword: str, api_key: str,
+                    n=10, offset=0,
+                    location: str = 'United States',
+                    country: str = 'us',
+                    language: str = 'en',
+                    device: str = 'desktop'):
     """
     :param keyword: the search term you want info for
     :param api_key: your SerpApi API key
     :param n: the number of results you'd like to return
-    :param offset: the offset number (i.e. an offset of 10 would give you page 2 results)
+    :param offset: the offset number (i.e. an offset of 10 would give you results starting from page 2)
+    :param location: a string of the location you want to search from
+    :param country: the country code for the country you want to search from
+    :param language: the language code for results desired
+    :param device: the device type ('desktop', 'tabl' (for iPads), or 'mobile' (for iPhones))
+
     :return: a dictionary of the results from SerpApi
     """
     keyword_params = {
         "engine": "google",
         "q": keyword,
-        "location": "New York, New York, United States",
+        "location": location,
         "google_domain": "google.com",
-        "gl": "us",
-        "hl": "en",
+        "gl": country,
+        "hl": language,
         "num": n,
         "start": offset,
+        "device": device,
         "api_key": api_key
     }
     search = GoogleSearch(keyword_params)
