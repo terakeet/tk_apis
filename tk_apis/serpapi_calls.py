@@ -3,8 +3,10 @@ import pandas as pd
 import numpy as np
 
 
-def get_serp_result(keyword: str, api_key: str,
-                    n=10, offset=0,
+def get_serp_result(keyword: str,
+                    api_key: str,
+                    n=10,
+                    offset=0,
                     location: str = 'United States',
                     country: str = 'us',
                     language: str = 'en',
