@@ -34,6 +34,34 @@ def get_related_keywords(keyword: str, api_key: str):
     return out
 
 
+def get_url_organic_kws(u: str, api_key: str):
+    """
+    :param url: the url you want to get data for
+    :param api_key: your semrush api key
+    :return: a dictionary with the information for your url
+    """
+    r = requests.get(url='https://api.semrush.com/',
+                     params={'key': api_key,
+                             'type': 'url_organic',
+                             'database': 'us',
+                             'url': u}
+                     )
+
+    temp = r.text
+    if re.search('^ERROR', temp):
+        temp = temp.split(' :: ')
+        keys = [temp[0]]
+        values = [temp[1]]
+    else:
+        temp = temp.splitlines()
+
+        keys = temp[0].split(';')
+        values = temp[1].split(';')
+
+    res = {keys[i]: values[i] for i in range(len(keys))}
+    return res
+
+
 def get_top_related_keyword(keyword: str, api_key: str):
     """
     :param keyword: the keyword you want to get the related keywords for
