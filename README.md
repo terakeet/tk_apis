@@ -48,6 +48,9 @@ sr.get_organic_results(keyword='babylonian empire',
                        api_key=os.environ['SEMRUSH_KEY'],
                        n=10)
 
+sr.get_url_organic_kws(u='https://www.nordstrom.com',
+                       api_key=os.environ['SEMRUSH_KEY'])
+
 ```
 
 ### SerpApi

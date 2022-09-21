@@ -34,16 +34,18 @@ def get_related_keywords(keyword: str, api_key: str):
     return out
 
 
-def get_url_organic_kws(u: str, api_key: str):
+def get_url_organic_kws(u: str, api_key: str, n: int = 100):
     """
-    :param url: the url you want to get data for
+    :param n: the number of results to retrieve
+    :param u: the url you want to get data for
     :param api_key: your semrush api key
-    :return: a dictionary with the information for your url
+    :return: a dataframe, where each row is a keyword associated with your URL
     """
     r = requests.get(url='https://api.semrush.com/',
                      params={'key': api_key,
                              'type': 'url_organic',
                              'database': 'us',
+                             'display_limit': n,
                              'url': u}
                      )
 
@@ -52,13 +54,15 @@ def get_url_organic_kws(u: str, api_key: str):
         temp = temp.split(' :: ')
         keys = [temp[0]]
         values = [temp[1]]
+
+        res = {keys[i]: values[i] for i in range(len(keys))}
     else:
         temp = temp.splitlines()
 
-        keys = temp[0].split(';')
-        values = temp[1].split(';')
+        res = pd.DataFrame(data=list(map(lambda x: x.split(';'), temp[1:len(temp)])),
+                           columns=temp[0].split(';'))
+        res['Position'] = list(map(int, res['Position']))
 
-    res = {keys[i]: values[i] for i in range(len(keys))}
     return res
 
 
