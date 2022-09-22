@@ -34,18 +34,21 @@ def get_related_keywords(keyword: str, api_key: str):
     return out
 
 
-def get_url_organic_kws(u: str, api_key: str, n: int = 100):
+def get_url_organic_kws(u: str, api_key: str, n: int = 100, sort:str = 'tr_desc'):
     """
+    :param sort: sorting parameter; see https://developer.semrush.com/api/v3/analytics/basic-docs/#sortings/ for possible values
     :param n: the number of results to retrieve
     :param u: the url you want to get data for
     :param api_key: your semrush api key
     :return: a dataframe, where each row is a keyword associated with your URL
     """
+
     r = requests.get(url='https://api.semrush.com/',
                      params={'key': api_key,
                              'type': 'url_organic',
                              'database': 'us',
                              'display_limit': n,
+                             'display_sort': sort,
                              'url': u}
                      )
 
