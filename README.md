@@ -23,11 +23,15 @@ load_dotenv()
 Once the credentials are in, you can load the desired module(s) and execute queries accordingly:
 
 ### Moz
+
+*Note: All values of `params` must be lists. Strings are not accepted.*
 ```angular2html
 from tk_apis import moz_calls as moz
 
-moz.get_domain_authority(url='https://www.terakeet.com', 
-                         api_key=os.environ['MOZ_AUTH'])
+moz.get_url_data(url='https://www.terakeet.com',
+                 api_key=os.environ['MOZ_AUTH'],
+                 params='monthly_history_deltas': ['domain_authority'],
+                 'daily_history_deltas': ['domain_authority'])
 ```
 
 ### SemRush
