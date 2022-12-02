@@ -34,6 +34,18 @@ moz.get_url_data(url='https://www.terakeet.com',
                  'daily_history_deltas': ['domain_authority'])
 ```
 
+Please declare the following environment variables in your .env file. 
+ - MOZ_ACCESS_ID
+ - MOZ_SECRET_KEY
+When you initialize the class, these values will be pulled in. You can overwrite the enviornment variables by passing in the arguments to the class at the time of declaring it. 
+
+```py
+from tk_apis import MOZAPI
+moz = MOZAPI()
+data = moz.url_metrics(['example.com'])
+df = moz.format_resposne(data)
+```
+
 ### SemRush
 ```angular2html
 from tk_apis import semrush_calls as sr
